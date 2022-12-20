@@ -1,0 +1,10 @@
+DPP:
+
+Feder muss vor der Drechachse sein
+Konstruktion muss weiter nach unten, mehr abstand vom rand, servomotoren müssen weiter auseinander
+2.servomotor evtl auf andere seite
+innenteile mehr abstand zu seiten --> 1cm damit es nicht spießt
+
+bibliotheken
+accel stepper
+tiny stepper --> ganz letztes
