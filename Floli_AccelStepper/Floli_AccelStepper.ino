@@ -6,8 +6,12 @@
 
 
 // Button things...
-const int buttonPin = 2;
+const int wrongTrash = 2;
 Bounce b = Bounce();
+
+// Button things...
+const int goodTrash = 10;
+Bounce c = Bounce();
 
 // Servo things...
 Servo myservo;
@@ -38,15 +42,20 @@ int state = 0;
 void setup() {
 
   // Setup button things
-  b.attach(buttonPin, INPUT_PULLUP);
+  b.attach(wrongTrash, INPUT_PULLUP);
   b.interval(50);
+
+  // Setup button things
+  c.attach(goodTrash, INPUT_PULLUP);
+  c.interval(50);
 
   // Setup things for serial ports
   Serial.begin(9600);
 
   // Initialize the servo pwm pin
   myservo.attach(servoPin);
-  myservo.write(0);
+  myservo.write(150);
+  
 
   // Setup things for the stepper
   // Set the PWM and brake pins so that the direction pins can be used to control the motor:
@@ -68,30 +77,65 @@ void setup() {
 
 void loop() {
   b.update();
-
+  c.update();
   if(b.fell())
   {
     // Set the current position to 0:
     //stepper.setCurrentPosition(0);
     Serial.println("Routine started");
 
-    stepper.setSpeed(200);
-    while (stepper.currentPosition() != 200) {
+    myservo.write(180);
+    delay(1000);
+
+    stepper.setSpeed(300);
+    while (stepper.currentPosition() != 900) {
       stepper.runSpeed();
     }
 
-    // Run the motor forward at 400 steps/second until the motor reaches 200 steps (1 revolution):
-    myservo.write(180); // Dem Servo wird 180 Grad befohlen
+    myservo.write(80); // Dem Servo wird 180 Grad befohlen
   
     delay(2000);
+    myservo.write(150); // Dem Servo wird 180 Grad befohlen
   
-    stepper.setSpeed(-200);
+    stepper.setSpeed(-300);
     // Run the motor backwards at 200 steps/second until the motor reaches -200 steps (1 revolution):
     while (stepper.currentPosition() != 0) {
       stepper.runSpeed();
     }  
 
-     myservo.write(0); // Dem Servo wird 180 Grad befohlen
+     
+     Serial.println("Routine finished");
+  }
+
+  if(c.fell())
+  {
+     myservo.write(80); // Dem Servo wird 180 Grad befohlen
+
+     delay(2000);
+     
+     stepper.setSpeed(-300);
+    while (stepper.currentPosition() != -550) {
+      stepper.runSpeed();
+    }
+
+    delay(2000);
+  
+    stepper.setSpeed(300);
+    // Run the motor backwards at 200 steps/second until the motor reaches -200 steps (1 revolution):
+    while (stepper.currentPosition() != 450) {
+      stepper.runSpeed();
+    }
+
+    delay(2000);
+    myservo.write(150); // Dem Servo wird 180 Grad befohlen
+    delay(2000);
+
+    stepper.setSpeed(-300);
+    // Run the motor backwards at 200 steps/second until the motor reaches -200 steps (1 revolution):
+    while (stepper.currentPosition() != 0) {
+      stepper.runSpeed();
+    }
+     
      Serial.println("Routine finished");
   }
 
