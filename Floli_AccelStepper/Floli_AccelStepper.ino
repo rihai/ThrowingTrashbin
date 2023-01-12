@@ -119,7 +119,7 @@ void loop() {
     }
 
     delay(2000);
-  
+
     stepper.setSpeed(300);
     // Run the motor backwards at 200 steps/second until the motor reaches -200 steps (1 revolution):
     while (stepper.currentPosition() != 450) {
