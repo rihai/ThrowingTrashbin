@@ -88,7 +88,7 @@ void loop() {
     delay(1000);
 
     stepper.setSpeed(300);
-    while (stepper.currentPosition() != 900) {
+    while (stepper.currentPosition() != 1200) {
       stepper.runSpeed();
     }
 
@@ -114,7 +114,7 @@ void loop() {
      delay(2000);
      
      stepper.setSpeed(-300);
-    while (stepper.currentPosition() != -550) {
+    while (stepper.currentPosition() != -600) {
       stepper.runSpeed();
     }
 
@@ -126,9 +126,9 @@ void loop() {
       stepper.runSpeed();
     }
 
-    delay(2000);
+    delay(1500);
     myservo.write(150); // Dem Servo wird 180 Grad befohlen
-    delay(2000);
+    delay(1500);
 
     stepper.setSpeed(-300);
     // Run the motor backwards at 200 steps/second until the motor reaches -200 steps (1 revolution):
