@@ -71,6 +71,7 @@ while(True):
         if(area > 300):
             right_trash()
             print("GREEEEEEN")
+        
 
     contours, hierarchy = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     print("before loop")
